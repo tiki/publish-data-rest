@@ -69,6 +69,7 @@ jobs:
           BUCKET_KEY_SECRET: ${{ secrets.BUCKET_KEY_SECRET }}
 
   create_release:
+    if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'release/')
     runs-on: ubuntu-latest
     environment: Production
     steps:
