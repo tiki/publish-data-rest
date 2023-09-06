@@ -1,0 +1,17 @@
+name = "ingest-microblink-receipt"
+main = "build/worker/shim.mjs"
+compatibility_date = "2023-03-22"
+account_id = "5c5263e05bb1e54242b1afb12a5c9259"
+
+routes = [
+    { pattern = "ingest.mytiki.com/api/latest/microblink-receipt", zone_id = "7be31970110fa56b1f8e1fe915a8b938" }
+]
+
+[vars]
+PUBLIC_KEY = "{\"kty\":\"EC\",\"use\":\"sig\",\"crv\":\"P-256\",\"kid\":\"0d2dbad0-81f5-4625-94a8-91e839581ac8\",\"x\":\"F4hIC9DufzIBAolcQsfOpsBEQd6Vgw5T2eci0GzuQM0\",\"y\":\"nkGBEGRI-QZ8AVztb20W2pzulUx_-jWbxiP1cgc89PY\",\"alg\":\"ES256\"}"
+BUCKET = "mytiki-ingest-20230607001833186100000001"
+BUCKET_REGION = "us-east-2"
+
+# The necessary secrets are:
+# - BUCKET_KEY_ID
+# - BUCKET_KEY_SECRET
