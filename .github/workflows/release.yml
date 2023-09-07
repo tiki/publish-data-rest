@@ -18,7 +18,7 @@ jobs:
     environment: Production
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Rust
         uses: actions-rs/toolchain@v1
@@ -29,7 +29,7 @@ jobs:
         run: cd endpoint/shopify_order && cargo install -q worker-build && worker-build --release
 
       - name: Deploy
-        uses: cloudflare/wrangler-action@2.0.0
+        uses: cloudflare/wrangler-action@v3.1.1
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           workingDirectory: "endpoint/shopify_order"
@@ -46,7 +46,7 @@ jobs:
     environment: Production
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Rust
         uses: actions-rs/toolchain@v1
@@ -57,7 +57,7 @@ jobs:
         run: cd endpoint/microblink_receipt && cargo install -q worker-build && worker-build --release
 
       - name: Deploy
-        uses: cloudflare/wrangler-action@2.0.0
+        uses: cloudflare/wrangler-action@v3.1.1
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           workingDirectory: "endpoint/microblink_receipt"
@@ -74,7 +74,7 @@ jobs:
     environment: Production
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Get Version
         id: version
