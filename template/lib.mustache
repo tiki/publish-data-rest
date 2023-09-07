@@ -1,0 +1,111 @@
+/*
+* Copyright (c) TIKI Inc.
+* MIT license. See LICENSE file in root directory.
+*/
+
+mod {{{filename}}};
+
+use apache_avro::{Codec, Writer};
+use ingest_lib::{
+    api::{cors, ErrorBuilder},
+    aws::s3::S3,
+    jwt, Ingest,
+};
+use {{{filename}}}::{{{clazz}}};
+use worker::{event, Context, Env, Request, Response, Result};
+
+#[event(fetch)]
+async fn main(req: Request, env: Env, ctx: Context) -> Result<Response> {
+    let res: Result<Response> = match wrapper(req, env, ctx).await {
+        Ok(res) => Ok(res),
+        Err(error) => Ok(match error.downcast_ref::<ErrorBuilder>() {
+            Some(error) => error.to_response(),
+            None => ErrorBuilder::new()
+                .status(500)
+                .message(&error.to_string())
+                .to_response(),
+        }),
+    };
+    cors::apply(res.unwrap())
+}
+
+async fn wrapper(
+    mut req: Request,
+    env: Env,
+    _: Context,
+) -> std::result::Result<Response, Box<dyn std::error::Error>> {
+    if let Err(res) = guard_method(&req) {
+        return Ok(res);
+    }
+    let public_key = env.var("PUBLIC_KEY")?.to_string();
+    let token = jwt::validate(
+        &req,
+        &public_key,
+        jwt::Config {
+            issuer: Some(String::from("com.mytiki.l0_auth")),
+            audience: Some(String::from("storage.l0.mytiki.com")),
+            clock_skew: 60,
+        },
+    )?;
+    let s3 = S3::new(&env.var("BUCKET")?.to_string())
+        .with_region(&env.var("BUCKET_REGION")?.to_string())
+        .with_key(
+            &env.var("BUCKET_KEY_ID")?.to_string(),
+            &env.var("BUCKET_KEY_SECRET")?.to_string(),
+        );
+    match req.json::<{{{clazz}}}>().await {
+        Ok(json) => {
+            let key = format!("/{}/{}.avro", token.claims().custom.subject, json.id());
+            let schema = {{{clazz}}}::schema();
+            let mut writer = Writer::with_codec(&schema, Vec::new(), Codec::Snappy);
+            writer.append_ser(json).unwrap();
+            let encoded = writer.into_inner()?;
+            s3.put(&key, encoded).await?;
+            Ok(Response::empty().unwrap().with_status(201))
+        }
+        Err(e) => Err(ErrorBuilder::new()
+            .status(400)
+            .message("JSON deserialization failed")
+            .detail(&e.to_string())
+            .help("Double-check the request body")
+            .to_error()),
+    }
+}
+
+fn guard_method(req: &Request) -> std::result::Result<(), Response> {
+    if let Err(res) = cors::guard(&req) {
+        return Err(res);
+    } else if !req.method().eq(&worker::Method::Post) {
+        Err(ErrorBuilder::new()
+            .status(405)
+            .help("Try POST")
+            .to_response())
+    } else {
+        Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::{{{filename}}}::{{{clazz}}};
+    use apache_avro::{Codec, Writer};
+    use ingest_lib::Ingest;
+    use serde_json;
+
+    const INPUT: &str = "{{{json}}}";
+
+    #[test]
+    fn deserialize() {
+        let json = serde_json::from_str::<{{{clazz}}}>(INPUT);
+        assert_eq!(json.is_ok(), true);
+    }
+
+    #[test]
+    fn serialize() {
+        let schema = {{{clazz}}}::schema();
+        let mut writer = Writer::with_codec(&schema, Vec::new(), Codec::Snappy);
+        let json = serde_json::from_str::<{{{clazz}}}>(INPUT).unwrap();
+        writer.append_ser(json).unwrap();
+        assert_eq!(writer.into_inner().is_ok(), true);
+    }
+}

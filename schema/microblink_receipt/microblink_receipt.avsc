@@ -1,0 +1,1173 @@
+{
+  "type": "record",
+  "name": "Receipt",
+  "namespace": "microblink",
+  "fields": [
+    {
+      "name": "receiptDate",
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "StringType",
+          "namespace": "microblink.receipt",
+          "fields": [
+            {
+              "name": "confidence",
+              "type": "float"
+            },
+            {
+              "name": "value",
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "receiptTime",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "retailerId",
+      "type": {
+        "type": "record",
+        "name": "Retailer",
+        "namespace": "microblink.receipt",
+        "fields": [
+          {
+            "name": "id",
+            "type": "int"
+          },
+          {
+            "name": "bannerId",
+            "type": "int"
+          }
+        ]
+      }
+    },
+    {
+      "name": "products",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "record",
+            "name": "Product",
+            "namespace": "microblink.receipt",
+            "fields": [
+              {
+                "name": "productNumber",
+                "type": [
+                  "null",
+                  "microblink.receipt.StringType"
+                ]
+              },
+              {
+                "name": "description",
+                "type": [
+                  "null",
+                  "microblink.receipt.StringType"
+                ]
+              },
+              {
+                "name": "quantity",
+                "type": [
+                  "null",
+                  {
+                    "type": "record",
+                    "name": "FloatType",
+                    "namespace": "microblink.receipt",
+                    "fields": [
+                      {
+                        "name": "confidence",
+                        "type": "float"
+                      },
+                      {
+                        "name": "value",
+                        "type": "float"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "unitPrice",
+                "type": [
+                  "null",
+                  "microblink.receipt.FloatType"
+                ]
+              },
+              {
+                "name": "unitOfMeasure",
+                "type": [
+                  "null",
+                  "microblink.receipt.StringType"
+                ]
+              },
+              {
+                "name": "totalPrice",
+                "type": [
+                  "null",
+                  "microblink.receipt.FloatType"
+                ]
+              },
+              {
+                "name": "fullPrice",
+                "type": "float"
+              },
+              {
+                "name": "line",
+                "type": "int"
+              },
+              {
+                "name": "productName",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "brand",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "category",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "size",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "rewardsGroup",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "competitorRewardsGroup",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "upc",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "imageUrl",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "shippingStatus",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "additionalLines",
+                "type": [
+                  "null",
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "record",
+                      "name": "AdditionalLine",
+                      "namespace": "microblink.receipt.product",
+                      "fields": [
+                        {
+                          "name": "type",
+                          "type": [
+                            "null",
+                            "microblink.receipt.StringType"
+                          ]
+                        },
+                        {
+                          "name": "text",
+                          "type": [
+                            "null",
+                            "microblink.receipt.StringType"
+                          ]
+                        },
+                        {
+                          "name": "lineNumber",
+                          "type": "int"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "priceAfterCoupons",
+                "type": [
+                  "null",
+                  "microblink.receipt.FloatType"
+                ]
+              },
+              {
+                "name": "voided",
+                "type": "boolean"
+              },
+              {
+                "name": "probability",
+                "type": "double"
+              },
+              {
+                "name": "sensitive",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "name": "possibleProducts",
+                "type": [
+                  "null",
+                  {
+                    "type": "array",
+                    "items": "microblink.receipt.Product"
+                  }
+                ]
+              },
+              {
+                "name": "subProducts",
+                "type": [
+                  "null",
+                  {
+                    "type": "array",
+                    "items": "microblink.receipt.Product"
+                  }
+                ]
+              },
+              {
+                "name": "added",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "name": "blinkReceiptBrand",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "blinkReceiptCategory",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "extendedFields",
+                "type": [
+                  "null",
+                  {
+                    "type": "map",
+                    "values": "string"
+                  }
+                ]
+              },
+              {
+                "name": "fuelType",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "descriptionPrefix",
+                "type": [
+                  "null",
+                  "microblink.receipt.StringType"
+                ]
+              },
+              {
+                "name": "descriptionPostfix",
+                "type": [
+                  "null",
+                  "microblink.receipt.StringType"
+                ]
+              },
+              {
+                "name": "skuPrefix",
+                "type": [
+                  "null",
+                  "microblink.receipt.StringType"
+                ]
+              },
+              {
+                "name": "skuPostfix",
+                "type": [
+                  "null",
+                  "microblink.receipt.StringType"
+                ]
+              },
+              {
+                "name": "attributes",
+                "type": [
+                  "null",
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "map",
+                      "values": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "sector",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "department",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "majorCategory",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "subCategory",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "itemType",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "coupons",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "record",
+            "name": "Coupon",
+            "namespace": "microblink.receipt",
+            "fields": [
+              {
+                "name": "type",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "amount",
+                "type": [
+                  "null",
+                  "microblink.receipt.FloatType"
+                ]
+              },
+              {
+                "name": "sku",
+                "type": [
+                  "null",
+                  "microblink.receipt.StringType"
+                ]
+              },
+              {
+                "name": "description",
+                "type": [
+                  "null",
+                  "microblink.receipt.StringType"
+                ]
+              },
+              {
+                "name": "relatedProductIndex",
+                "type": "int"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "total",
+      "type": [
+        "null",
+        "microblink.receipt.FloatType"
+      ]
+    },
+    {
+      "name": "tip",
+      "type": [
+        "null",
+        "microblink.receipt.FloatType"
+      ]
+    },
+    {
+      "name": "subtotal",
+      "type": [
+        "null",
+        "microblink.receipt.FloatType"
+      ]
+    },
+    {
+      "name": "taxes",
+      "type": [
+        "null",
+        "microblink.receipt.FloatType"
+      ]
+    },
+    {
+      "name": "storeNumber",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "merchantName",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "storeAddress",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "storeCity",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "blinkReceiptId",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "storeState",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "storeZip",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "storeCountry",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "storePhone",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "cashierId",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "transactionId",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "registerId",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "paymentMethods",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "record",
+            "name": "PaymentMethod",
+            "namespace": "microblink.receipt",
+            "fields": [
+              {
+                "name": "paymentMethod",
+                "type": [
+                  "null",
+                  "microblink.receipt.StringType"
+                ]
+              },
+              {
+                "name": "cardType",
+                "type": [
+                  "null",
+                  "microblink.receipt.StringType"
+                ]
+              },
+              {
+                "name": "cardIssuer",
+                "type": [
+                  "null",
+                  "microblink.receipt.StringType"
+                ]
+              },
+              {
+                "name": "amount",
+                "type": [
+                  "null",
+                  "microblink.receipt.FloatType"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "taxId",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "mallName",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "last4cc",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "ocrConfidence",
+      "type": "float"
+    },
+    {
+      "name": "merchantSource",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "foundTopEdge",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "foundBottomEdge",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "eReceiptOrderNumber",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "eReceiptOrderStatus",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "eReceiptRawHtml",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "eReceiptShippingAddress",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "shipments",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "record",
+            "name": "Shipment",
+            "namespace": "microblink.receipt",
+            "fields": [
+              {
+                "name": "status",
+                "type": "string"
+              },
+              {
+                "name": "products",
+                "type": [
+                  "null",
+                  {
+                    "type": "array",
+                    "default": [],
+                    "items": "microblink.receipt.Product"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "longTransactionId",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "subtotalMatches",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "eReceiptEmailProvider",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "eReceiptEmailId",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "eReceiptAuthenticated",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "instacartShopper",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "eReceipt",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "eReceiptComponentEmails",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "default": [],
+          "items": "microblink.Receipt"
+        }
+      ]
+    },
+    {
+      "name": "duplicate",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "fraudulent",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "receiptDateTime",
+      "type": "long"
+    },
+    {
+      "name": "duplicateBlinkReceiptIds",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "default": [],
+          "items": "string"
+        }
+      ]
+    },
+    {
+      "name": "merchantMatchGuess",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "productsPendingLookup",
+      "type": "int"
+    },
+    {
+      "name": "qualifiedPromotions",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "record",
+            "name": "Promotion",
+            "namespace": "microblink.receipt",
+            "fields": [
+              {
+                "name": "id",
+                "type": "long"
+              },
+              {
+                "name": "slug",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "reward",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "rewardCurrency",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "errorCode",
+                "type": "int"
+              },
+              {
+                "name": "errorMessage",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "relatedProductIndexes",
+                "type": [
+                  "null",
+                  {
+                    "type": "array",
+                    "default": [],
+                    "items": "int"
+                  }
+                ]
+              },
+              {
+                "name": "qualifications",
+                "type": [
+                  "null",
+                  {
+                    "type": "array",
+                    "default": [],
+                    "items": {
+                      "type": "array",
+                      "default": [],
+                      "items": "int"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "unqualifiedPromotions",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "default": [],
+          "items": "microblink.receipt.Promotion"
+        }
+      ]
+    },
+    {
+      "name": "extendedFields",
+      "type": [
+        "null",
+        {
+          "type": "map",
+          "values": "string"
+        }
+      ]
+    },
+    {
+      "name": "eReceiptAdditionalFees",
+      "type": [
+        "null",
+        {
+          "type": "map",
+          "values": "string"
+        }
+      ]
+    },
+    {
+      "name": "purchaseType",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "loyaltyForBanner",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "channel",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "submissionDate",
+      "type": [
+        "null",
+        "long"
+      ]
+    },
+    {
+      "name": "eReceiptFulfilledBy",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "eReceiptShippingStatus",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "eReceiptPOSSystem",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "eReceiptSubMerchant",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "qualifiedSurveys",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "record",
+            "name": "Survey",
+            "namespace": "microblink.receipt",
+            "fields": [
+              {
+                "name": "clientUserId",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "serverId",
+                "type": "int"
+              },
+              {
+                "name": "slug",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "rewardValue",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "startDate",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "endDate",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "name": "questions",
+                "type": [
+                  "null",
+                  {
+                    "type": "array",
+                    "default": [],
+                    "items": {
+                      "type": "record",
+                      "name": "SurveyQuestion",
+                      "namespace": "microblink.receipt.survey",
+                      "fields": [
+                        {
+                          "name": "myIndex",
+                          "type": "int"
+                        },
+                        {
+                          "name": "lastQuestion",
+                          "type": "boolean",
+                          "default": false
+                        },
+                        {
+                          "name": "nextQuestionIndex",
+                          "type": "int"
+                        },
+                        {
+                          "name": "serverId",
+                          "type": "int"
+                        },
+                        {
+                          "name": "text",
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        {
+                          "name": "type",
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        {
+                          "name": "answers",
+                          "type": [
+                            "null",
+                            {
+                              "type": "array",
+                              "default": [],
+                              "items": {
+                                "type": "record",
+                                "name": "SurveyAnswer",
+                                "namespace": "microblink.receipt.survey",
+                                "fields": [
+                                  {
+                                    "name": "id",
+                                    "type": "int"
+                                  },
+                                  {
+                                    "name": "text",
+                                    "type": [
+                                      "null",
+                                      "string"
+                                    ]
+                                  },
+                                  {
+                                    "name": "nextQuestionIndex",
+                                    "type": [
+                                      "null",
+                                      "int"
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "name": "multipleAnswers",
+                          "type": "boolean",
+                          "default": false
+                        },
+                        {
+                          "name": "totalNumberOfQuestions",
+                          "type": "int"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "barcode",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "eReceiptMerchantEmail",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "eReceiptEmailSubject",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "eReceiptShippingCosts",
+      "type": [
+        "null",
+        "float"
+      ]
+    },
+    {
+      "name": "currencyCode",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "clientMerchantName",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "loyaltyProgram",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "merchantSources",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "default": [],
+          "items": "int"
+        }
+      ]
+    },
+    {
+      "name": "paymentTerminalId",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "paymentTransactionId",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    },
+    {
+      "name": "combinedRawText",
+      "type": [
+        "null",
+        "microblink.receipt.StringType"
+      ]
+    }
+  ]
+}
