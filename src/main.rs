@@ -10,7 +10,7 @@ use mustache::{Data, MapBuilder};
 use std::fs;
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
-const ENDPOINT_DIR: &str = "../endpoint";
+const ENDPOINT_DIR: &str = "endpoint";
 const TEMPLATE_DIR: &str = "template";
 
 fn main() {

@@ -22,12 +22,10 @@ jobs:
           toolchain: stable
 
       - name: Install Cargo-junit
-        run: |
-          cargo install cargo-junit
+        run: cargo install cargo-junit
 
       - name: Run Generate
-        run: |
-          cd generate && cargo run
+        run: cargo run
 
       - name: Run Tests
         run: |

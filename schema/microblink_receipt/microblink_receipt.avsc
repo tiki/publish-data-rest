@@ -754,7 +754,10 @@
     },
     {
       "name": "receiptDateTime",
-      "type": "long"
+      "type": [
+        "null",
+        "long"
+      ]
     },
     {
       "name": "duplicateBlinkReceiptIds",
