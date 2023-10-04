@@ -55,7 +55,7 @@ pub struct MicroblinkReceipt {
     e_receipt_component_emails: Option<Vec<MicroblinkReceipt>>,
     duplicate: bool,
     fraudulent: bool,
-    receipt_date_time: i64,
+    receipt_date_time: Option<i64>,
     duplicate_blink_receipt_ids: Option<Vec<String>>,
     merchant_match_guess: Option<StringType>,
     products_pending_lookup: i32,
@@ -851,7 +851,10 @@ impl Ingest for MicroblinkReceipt {
     },
     {
       "name": "receiptDateTime",
-      "type": "long"
+      "type": [
+        "null",
+        "long"
+      ]
     },
     {
       "name": "duplicateBlinkReceiptIds",
