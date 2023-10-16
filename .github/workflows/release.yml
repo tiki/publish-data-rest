@@ -29,7 +29,7 @@ jobs:
         run: cd endpoint/shopify_order && cargo install -q worker-build && worker-build --release
 
       - name: Deploy
-        uses: cloudflare/wrangler-action@v3.1.1
+        uses: cloudflare/wrangler-action@v3.3.1
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           workingDirectory: "endpoint/shopify_order"
@@ -57,7 +57,7 @@ jobs:
         run: cd endpoint/microblink_receipt && cargo install -q worker-build && worker-build --release
 
       - name: Deploy
-        uses: cloudflare/wrangler-action@v3.1.1
+        uses: cloudflare/wrangler-action@v3.3.1
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           workingDirectory: "endpoint/microblink_receipt"
