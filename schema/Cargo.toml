@@ -1,0 +1,12 @@
+[package]
+name = "publish-rest-schema"
+version = "0.0.1"
+edition = "2021"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+apache-avro = { version = "0.16.0", features = ["snappy"] }
+
+[features]
+dummy = []
+microblink_receipt = []

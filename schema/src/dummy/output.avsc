@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "name": "Receipt",
+  "namespace": "dummy",
+  "fields": [
+    {
+      "name": "hello",
+      "type": [
+        "null",
+        "string"
+      ]
+    }
+  ]
+}
