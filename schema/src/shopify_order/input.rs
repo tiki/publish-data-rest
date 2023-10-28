@@ -3,8 +3,6 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-use apache_avro::Schema;
-use ingest_lib::Ingest;
 use serde::{Deserialize, Serialize};
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -88,18 +86,6 @@ pub struct ShopifyOrder {
     pub updated_at: Option<String>,
     pub user_id: Option<u64>,
     pub order_status_url: Option<String>,
-}
-
-impl Ingest for ShopifyOrder {
-    fn id(&self) -> String {
-        self.id.to_string()
-    }
-    fn schema() -> Schema {
-        let raw_schema = r#"
-{{{avro}}}
-"#;
-        Schema::parse_str(raw_schema).unwrap()
-    }
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
