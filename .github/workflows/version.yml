@@ -38,6 +38,7 @@ jobs:
         run: |
           sed -i '3 s/version = *.*.*/version = "${{ steps.semver.outputs.nextStrict }}"/' endpoint/Cargo.toml
           sed -i '3 s/version = *.*.*/version = "${{ steps.semver.outputs.nextStrict }}"/' schema/Cargo.toml
+          sed -i 's/"version": "*.*.*"/"version": "${{ steps.semver.outputs.nextStrict }}"/' package.json
 
       - name: Commit Changes
         continue-on-error: true

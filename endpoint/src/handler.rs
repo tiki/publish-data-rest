@@ -6,7 +6,7 @@
 use crate::utils::{guard, jwt, aws::s3::S3, api::ErrorBuilder};
 use worker::{Context, Env, Request, Response};
 use apache_avro::{Codec, Writer};
-use publish_rest_schema::generic;
+use publish_data_rest_schema::generic;
 
 pub async fn handle(
     mut req: Request,
